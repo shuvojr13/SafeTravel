@@ -180,6 +180,6 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-Developed by [Your Name/Username]  
+Developed by Ahad Hossain  
 _Last Updated: 04:02 PM +06, Tuesday, August 12, 2025_  
 Questions? Open an issue on GitHub.
