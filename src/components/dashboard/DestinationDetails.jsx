@@ -22,6 +22,11 @@ const saveItineraryToStorage = (trip) => {
   localStorage.setItem("itinerary", JSON.stringify([...existing, trip]));
 };
 
+const isAlreadyInItinerary = (countryId) => {
+  const existing = JSON.parse(localStorage.getItem("itinerary") || "[]");
+  return existing.some((trip) => trip.country?.cca3 === countryId);
+};
+
 const DestinationDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -48,14 +53,7 @@ const DestinationDetails = () => {
     enabled: !!lat && !!lon,
   });
 
-  const handleSave = () => {
-    if (!dates.from || !dates.to) {
-      setNotification("Please select both start and end dates.");
-      setTimeout(() => setNotification(""), 2000);
-      return;
-    }
-    setShowConfirm(true);
-  };
+  const alreadySaved = isAlreadyInItinerary(id);
 
   const confirmAdd = () => {
     const trip = {
@@ -131,11 +129,17 @@ const DestinationDetails = () => {
             </p>
             <button
               onClick={() => setShowItinerary(true)}
-              className="cursor-pointer mt-4 px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg shadow hover:from-indigo-600 hover:to-purple-600 transition font-semibold"
+              className="cursor-pointer mt-4 px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-lg shadow hover:from-indigo-600 hover:to-purple-600 transition font-semibold disabled:opacity-60"
+              disabled={alreadySaved}
             >
-              Add to My Itinerary
+              {alreadySaved ? "Already in My Itinerary" : "Add to My Itinerary"}
             </button>
-            {showItinerary && (
+            {alreadySaved && (
+              <div className="mt-2 text-sm text-red-500 font-semibold">
+                This destination is already saved in your itinerary.
+              </div>
+            )}
+            {showItinerary && !alreadySaved && (
               <div className="mt-4 bg-indigo-50 dark:bg-gray-700 p-4 rounded-lg shadow">
                 <label className="block mb-2 text-gray-700 dark:text-gray-200 font-semibold">
                   Select Travel Dates:
@@ -159,7 +163,19 @@ const DestinationDetails = () => {
                   />
                   <button
                     className="cursor-pointer px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-                    onClick={handleSave}
+                    onClick={() => {
+                      if (!dates.from || !dates.to) {
+                        setNotification("Please select both start and end dates.");
+                        setTimeout(() => setNotification(""), 2000);
+                        return;
+                      }
+                      if (new Date(dates.from) >= new Date(dates.to)) {
+                        setNotification("Start date must be before end date.");
+                        setTimeout(() => setNotification(""), 2000);
+                        return;
+                      }
+                      setShowConfirm(true);
+                    }}
                   >
                     Save
                   </button>

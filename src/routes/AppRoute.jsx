@@ -11,6 +11,7 @@ import ProfilePage from "../pages/ProfilePage";
 import Dashboard from "../components/dashboard/Dashboard";
 import DestinationDetails from "../components/dashboard/DestinationDetails";
 import Itinerary from "../components/dashboard/Itinerary";
+import ScrollToTop from "../utils/SCrollToTop";
 // ...
 const AppRoute = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoute = () => {
       <AuthProvider>
         <Nav />
         <Toaster position="top-right" />
+        <ScrollToTop />
         <div className="flex-1 overflow-y-auto  dark:bg-gray-600">
           <Routes>
             <Route path="/" element={<HomePage />} />
