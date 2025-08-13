@@ -13,6 +13,7 @@ import DestinationDetails from "../components/dashboard/DestinationDetails";
 import Itinerary from "../components/dashboard/Itinerary";
 import ScrollToTop from "../utils/SCrollToTop";
 import  SignUp  from "../components/signup/SignUp";
+import NotFound from "../utils/NotFound";
 // ...
 const AppRoute = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoute = () => {
         <ScrollToTop />
         <div className="flex-1 overflow-y-auto  dark:bg-gray-600">
           <Routes>
+            <Route path="/*" element={<NotFound />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LoginPage />} />
