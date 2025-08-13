@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Eye, EyeOff } from "lucide-react";
 import { AuthContext } from "../../AuthContext/AuthContext";
+import { Link } from "react-router-dom";
 
 const schema = yup.object().shape({
   username: yup.string().required("Username is required").min(3),
@@ -76,12 +77,12 @@ export default function Login() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Don't have an account?{" "}
-              <a
-                href="/signup"
+              <Link
+                to="/signup"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
         </form>
