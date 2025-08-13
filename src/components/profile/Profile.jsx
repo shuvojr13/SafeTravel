@@ -20,9 +20,9 @@ export default function Profile() {
                 {/* Profile Image */}
                 <div className="relative z-10">
                     <img
-                        src={user.image}
+                        src="https://i.pinimg.com/1200x/46/79/4a/46794a090f4a6fa7c3585cd6d715219e.jpg"
                         alt={user.username}
-                        className="w-32 h-32 mx-auto rounded-full border-4 border-indigo-500 shadow-lg object-cover transition-transform duration-300 hover:scale-105"
+                        className="w-24 h-24 mx-auto rounded-full border-4 border-indigo-500 shadow-lg object-cover transition-transform duration-300 hover:scale-105"
                     />
                 </div>
 

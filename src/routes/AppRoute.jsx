@@ -12,6 +12,7 @@ import Dashboard from "../components/dashboard/Dashboard";
 import DestinationDetails from "../components/dashboard/DestinationDetails";
 import Itinerary from "../components/dashboard/Itinerary";
 import ScrollToTop from "../utils/SCrollToTop";
+import { SignUp } from "../components/signup/SignUp";
 // ...
 const AppRoute = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoute = () => {
         <div className="flex-1 overflow-y-auto  dark:bg-gray-600">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LoginPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/destination/:id" element={<DestinationDetails />} />
