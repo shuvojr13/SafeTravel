@@ -30,7 +30,7 @@ const genders = [
   { value: "other", label: "Other" },
 ];
 
-export const SignUp = () => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -196,3 +196,4 @@ export const SignUp = () => {
     </div>
   );
 };
+export default SignUp;

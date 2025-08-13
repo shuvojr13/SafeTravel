@@ -12,7 +12,7 @@ import Dashboard from "../components/dashboard/Dashboard";
 import DestinationDetails from "../components/dashboard/DestinationDetails";
 import Itinerary from "../components/dashboard/Itinerary";
 import ScrollToTop from "../utils/SCrollToTop";
-import { SignUp } from "../components/signup/SignUp";
+import  SignUp  from "../components/signup/SignUp";
 // ...
 const AppRoute = () => {
   return (
