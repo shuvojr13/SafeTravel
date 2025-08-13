@@ -11,7 +11,15 @@ const schema = yup.object().shape({
   username: yup.string().required("Username is required").min(3),
   email: yup.string().email("Invalid email").required("Email is required"),
   gender: yup.string().required("Gender is required"),
-  password: yup.string().required("Password is required").min(6),
+  password: yup
+  .string()
+  .required("Password is required")
+  .min(6, "Password must be at least 6 characters")
+  .matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+    "Password must include uppercase, lowercase, number, and special character"
+  ),
+
 });
 
 const signUpUser = async (data) => {
