@@ -146,7 +146,7 @@ src/
      npm run dev
      ```
 
-**Live Link:** [https://traveltacker.netlify.app/](https://traveltacker.netlify.app/)
+**Live Link:** [https://travelstatus.netlify.app/](https://travelstatus.netlify.app/)
 
 ---
 
