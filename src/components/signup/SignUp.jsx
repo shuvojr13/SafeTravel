@@ -1,30 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 const schema = yup.object().shape({
-  firstName: yup.string().required("First name is required").min(2),
-  lastName: yup.string().required("Last name is required").min(2),
-  username: yup.string().required("Username is required").min(3),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  firstName: yup
+    .string()
+    .required("First name is required")
+    .min(2, "First name must be at least 2 characters"),
+  lastName: yup
+    .string()
+    .required("Last name is required")
+    .min(2, "Last name must be at least 2 characters"),
+  username: yup
+    .string()
+    .required("Username is required")
+    .min(4, "Username must be at least 4 characters"),
+  email: yup
+    .string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
   gender: yup.string().required("Gender is required"),
   password: yup
-  .string()
-  .required("Password is required")
-  .min(6, "Password must be at least 6 characters")
-  .matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-    "Password must include uppercase, lowercase, number, and special character"
-  ),
-
+    .string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters")
+    .matches(/[A-Z]/, "Include at least one uppercase letter")
+    .matches(/[a-z]/, "Include at least one lowercase letter")
+    .matches(/\d/, "Include at least one number")
+    .matches(/[@$!%*?&]/, "Include at least one special character (@$!%*?&)"),
 });
 
 const signUpUser = async (data) => {
   const users = JSON.parse(localStorage.getItem("localUsers") || "[]");
   if (users.some((u) => u.username === data.username)) {
+    toast.error("Username already exists");
     throw new Error("Username already exists");
   }
   users.push(data);
@@ -38,7 +52,7 @@ const genders = [
   { value: "other", label: "Other" },
 ];
 
-export default function SignUp()  {
+export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -48,6 +62,8 @@ export default function SignUp()  {
     reset,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange", // validate as user types
+    reValidateMode: "onBlur", // revalidate on blur
   });
 
   const { mutate, isLoading, isSuccess, isError, error } = useMutation({
@@ -58,6 +74,14 @@ export default function SignUp()  {
   const onSubmit = (formData) => {
     mutate(formData);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Account created successfully!");
+    }
+    if (isError && error?.message) {
+      toast.error(error.message);
+    }
+  }, [isSuccess, isError, error]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -184,23 +208,25 @@ export default function SignUp()  {
             Account created successfully!
           </div>
         )}
+
         {isError && (
           <div className="mt-4 text-red-600 text-center font-semibold">
-            {error.message || "Sign up failed. Please try again."}
+            Sign up failed. Please try again.
           </div>
         )}
+
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Already have an account?{" "}
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               Sign in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
     </div>
   );
-};
+}

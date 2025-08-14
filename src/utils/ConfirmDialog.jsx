@@ -26,7 +26,7 @@ const ConfirmDialog = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 w-full max-w-md relative">
         <button
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          className="cursor-pointer absolute top-3 right-3 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           onClick={onCancel}
         >
           <X />
@@ -37,7 +37,7 @@ const ConfirmDialog = ({
           <p className="mt-2 text-gray-600 dark:text-gray-300 text-center">{description}</p>
           <div className="mt-6 flex gap-4">
             <button
-              className={`px-5 py-2 rounded-lg font-semibold shadow ${
+              className={`px-5 py-2 rounded-lg font-semibold shadow cursor-pointer ${
                 type === "remove"
                   ? "bg-red-500 text-white hover:bg-red-600"
                   : type === "add"
@@ -49,7 +49,7 @@ const ConfirmDialog = ({
               {confirmText}
             </button>
             <button
-              className="px-5 py-2 rounded-lg font-semibold bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+              className="cursor-pointer px-5 py-2 rounded-lg font-semibold bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
               onClick={onCancel}
             >
               {cancelText}

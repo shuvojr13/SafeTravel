@@ -54,7 +54,7 @@ export default function Nav() {
           </button>
           {/* Centered Logo */}
           <div className="flex-1 flex justify-center">
-            <Link to="/" className="text-2xl font-bold text-gray-800 dark:text-white">
+            <Link to="/" className="text-2xl font-bold text-violet-800 dark:text-white">
               Safe Travel
             </Link>
           </div>
@@ -70,7 +70,7 @@ export default function Nav() {
 
         {/* Desktop: Logo left, nav right */}
         <div className="hidden md:flex w-full justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-gray-800 dark:text-white">
+          <Link to="/" className="text-2xl font-bold text-violet-800 dark:text-white">
             Safe Travel
           </Link>
           <div className="flex items-center space-x-4">
