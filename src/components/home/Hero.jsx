@@ -8,9 +8,10 @@ const Hero = () => {
     <section className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headline */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6">
-          Welcome to Safe Travel
-        </h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-gradient">
+  Welcome to Safe Travel
+</h1>
+
         {/* Image */}
         <div className="w-full md:w-1/2 mx-auto">
           <img
