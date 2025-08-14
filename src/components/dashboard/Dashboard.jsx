@@ -4,6 +4,7 @@ import { useCountriesSearch } from "../../hooks/useCountriesSearch";
 import SearchBar from "./SearchBar";
 import CountryCard from "./CountryCard";
 import Pagination from "./Pagination";
+import CountryCardSkeleton from "./CountryCardSkeleton";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -11,7 +12,11 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   const perPage = 9;
 
-  const { data = [], isLoading, isError } = useCountriesSearch(page, searchTerm, perPage);
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useCountriesSearch(page, searchTerm, perPage);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-100 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -22,8 +27,14 @@ const Dashboard = () => {
 
         <SearchBar
           value={searchTerm}
-          onChange={(val) => { setSearchTerm(val); setPage(1); }}
-          onClear={() => { setSearchTerm(""); setPage(1); }}
+          onChange={(val) => {
+            setSearchTerm(val);
+            setPage(1);
+          }}
+          onClear={() => {
+            setSearchTerm("");
+            setPage(1);
+          }}
         />
 
         {!searchTerm ? (
@@ -31,7 +42,11 @@ const Dashboard = () => {
             Enter a country or city name to start exploring!
           </p>
         ) : isLoading ? (
-          <p className="text-center py-8">Loading...</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Array.from({ length: perPage }).map((_, idx) => (
+              <CountryCardSkeleton key={idx} />
+            ))}
+          </div>
         ) : isError ? (
           <p className="text-center text-red-600 dark:text-red-400 py-8">
             Error loading data. Please try again.
