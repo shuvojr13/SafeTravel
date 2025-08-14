@@ -11,6 +11,14 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6">
           Welcome to Safe Travel
         </h1>
+        {/* Image */}
+        <div className="w-full md:w-1/2 mx-auto">
+          <img
+            src="https://i.pinimg.com/736x/01/44/e2/0144e236b53ede31bbcce8f63d183228.jpg" // Replace with your actual image path
+            alt="Happy travelers"
+            className="rounded-lg  w-1/4 h-auto object-cover mx-auto"
+          />
+        </div>
         {/* Subheadline */}
         <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
           Partner with us for secure, reliable, and professional travel solutions tailored to your needs.
