@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const schema = yup.object().shape({
@@ -54,7 +54,7 @@ const genders = [
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-
+   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -68,7 +68,11 @@ export default function SignUp() {
 
   const { mutate, isLoading, isSuccess, isError, error } = useMutation({
     mutationFn: signUpUser,
-    onSuccess: () => reset(),
+    onSuccess: () => {
+    toast.success("Account created successfully!");
+    reset();
+    navigate("/login"); 
+  },
   });
 
   const onSubmit = (formData) => {
@@ -76,7 +80,7 @@ export default function SignUp() {
   };
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Account created successfully!");
+      // toast.success("Account created successfully!");  
     }
     if (isError && error?.message) {
       toast.error(error.message);
@@ -207,6 +211,7 @@ export default function SignUp() {
           <div className="mt-4 text-green-600 text-center font-semibold">
             Account created successfully!
           </div>
+          
         )}
 
         {isError && (
