@@ -85,18 +85,24 @@ export default function Nav() {
           {/* Hide dark mode toggle in menu, since it's already on the left */}
           {user ? (
             <>
-              <Link to="/profile" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+              <Link to="/profile" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
+                
                 <User className="h-5 w-5" /> <span>Profile</span>
               </Link>
-              <Link to="/dashboard" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+              <Link to="/dashboard" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
                 <LayoutDashboard className="h-5 w-5" /> <span>Dashboard</span>
               </Link>
-              <button onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md">
+              <button 
+onClick={() => {
+    logout();
+    setIsMenuOpen(false);
+  }}
+ className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md" >
                 <LogOut className="h-5 w-5" /> <span>Logout</span>
               </button>
             </>
           ) : (
-            <Link to="/login" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+            <Link to="/login" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
               <LogIn className="h-5 w-5" /> <span>Login</span>
             </Link>
           )}
