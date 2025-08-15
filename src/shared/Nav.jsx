@@ -1,7 +1,16 @@
-import React, { useState, useContext } from 'react';
-import { Sun, Moon, User, LayoutDashboard, LogOut, LogIn, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../AuthContext/AuthContext';
+import React, { useState, useContext } from "react";
+import {
+  Sun,
+  Moon,
+  User,
+  LayoutDashboard,
+  LogOut,
+  LogIn,
+  Menu,
+  X,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthContext";
 
 export default function Nav() {
   const { user, logout } = useContext(AuthContext);
@@ -10,29 +19,48 @@ export default function Nav() {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle("dark");
   };
- console.log(user);
-  
+  console.log(user);
+
   const navLinks = (
     <>
-      <button onClick={toggleDarkMode} className="p-2 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
-        {isDarkMode ? <Sun className="h-6 w-6 text-yellow-500" /> : <Moon className="h-6 w-6" />}
+      <button
+        onClick={toggleDarkMode}
+        className="p-2 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
+      >
+        {isDarkMode ? (
+          <Sun className="h-6 w-6 text-yellow-500" />
+        ) : (
+          <Moon className="h-6 w-6" />
+        )}
       </button>
       {user ? (
         <>
-          <Link to="/profile" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+          <Link
+            to="/profile"
+            className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+          >
             <User className="h-5 w-5" /> <span>Profile</span>
           </Link>
-          <Link to="/dashboard" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+          <Link
+            to="/dashboard"
+            className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+          >
             <LayoutDashboard className="h-5 w-5" /> <span>Dashboard</span>
           </Link>
-          <button onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md">
+          <button
+            onClick={logout}
+            className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md"
+          >
             <LogOut className="h-5 w-5" /> <span>Logout</span>
           </button>
         </>
       ) : (
-        <Link to="/login" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md">
+        <Link
+          to="/login"
+          className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+        >
           <LogIn className="h-5 w-5" /> <span>Login</span>
         </Link>
       )}
@@ -50,11 +78,18 @@ export default function Nav() {
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
             aria-label="Toggle dark mode"
           >
-            {isDarkMode ? <Sun className="h-6 w-6 text-yellow-500" /> : <Moon className="h-6 w-6" />}
+            {isDarkMode ? (
+              <Sun className="h-6 w-6 text-yellow-500" />
+            ) : (
+              <Moon className="h-6 w-6" />
+            )}
           </button>
           {/* Centered Logo */}
           <div className="flex-1 flex justify-center">
-            <Link to="/" className="text-2xl font-bold text-violet-800 dark:text-white">
+            <Link
+              to="/"
+              className="text-2xl font-bold text-violet-800 dark:text-white"
+            >
               Safe Travel
             </Link>
           </div>
@@ -64,18 +99,23 @@ export default function Nav() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
         {/* Desktop: Logo left, nav right */}
         <div className="hidden md:flex w-full justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-violet-800 dark:text-white">
+          <Link
+            to="/"
+            className="text-2xl font-bold text-violet-800 dark:text-white"
+          >
             Safe Travel
           </Link>
-          <div className="flex items-center space-x-4">
-            {navLinks}
-          </div>
+          <div className="flex items-center space-x-4">{navLinks}</div>
         </div>
       </div>
 
@@ -85,24 +125,36 @@ export default function Nav() {
           {/* Hide dark mode toggle in menu, since it's already on the left */}
           {user ? (
             <>
-              <Link to="/profile" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
-                
+              <Link
+                to="/profile"
+                className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <User className="h-5 w-5" /> <span>Profile</span>
               </Link>
-              <Link to="/dashboard" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                to="/dashboard"
+                className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <LayoutDashboard className="h-5 w-5" /> <span>Dashboard</span>
               </Link>
-              <button 
-onClick={() => {
-    logout();
-    setIsMenuOpen(false);
-  }}
- className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md" >
+              <button
+                onClick={() => {
+                  logout();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center space-x-2 cursor-pointer text-white bg-violet-600 p-2 rounded-md"
+              >
                 <LogOut className="h-5 w-5" /> <span>Logout</span>
               </button>
             </>
           ) : (
-            <Link to="/login" className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md" onClick={() => setIsMenuOpen(false)}>
+            <Link
+              to="/login"
+              className="flex items-center space-x-2 text-white bg-violet-600 p-2 rounded-md"
+              onClick={() => setIsMenuOpen(false)}
+            >
               <LogIn className="h-5 w-5" /> <span>Login</span>
             </Link>
           )}
